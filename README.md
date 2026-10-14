@@ -4,6 +4,8 @@ End-to-end data analysis of **~100K real orders** from Olist, a Brazilian e-comm
 It uses SQL, Python and an interactive dashboard to answer one question: **what drives revenue
 and customer satisfaction, and what should the business fix first?**
 
+### 🔗 [**Live interactive dashboard →**](https://jugalpatel3981.github.io/olist-ecommerce-analysis/)
+
 ![Dashboard](images/dashboard.png)
 
 **Tech stack:** SQL (DuckDB) · Python (pandas, matplotlib, seaborn) · Plotly · Streamlit · Jupyter
@@ -60,10 +62,12 @@ olist-ecommerce-analysis/
 │   ├── run_queries.py            # 3. run all SQL files -> sql/results/*.csv
 │   ├── build_notebook.py         # generates the analysis notebook
 │   ├── export_dashboard_data.py  # compact Parquet extract for the dashboard
+│   ├── export_web_data.py        # pre-aggregated JSON for the live web dashboard
 │   └── viz_style.py              # shared chart style
 ├── sql/                          # 16 business questions answered in SQL
 │   └── results/                  # query outputs (CSV)
 ├── notebooks/olist_analysis.ipynb
+├── docs/                         # live web dashboard (GitHub Pages)
 ├── dashboard/
 │   ├── app.py                    # Streamlit dashboard (4 tabs, filters)
 │   └── data/                     # Parquet extract (~7 MB)
