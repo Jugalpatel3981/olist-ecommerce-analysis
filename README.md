@@ -123,7 +123,8 @@ payment types, and incomplete months at the start and end of the date range (exc
 ## ▶️ How to run
 
 ```bash
-git clone <this-repo-url> && cd olist-ecommerce-analysis
+git clone https://github.com/Jugalpatel3981/olist-ecommerce-analysis.git
+cd olist-ecommerce-analysis
 pip install -r requirements.txt
 
 python scripts/download_data.py      # ~120 MB of CSVs
