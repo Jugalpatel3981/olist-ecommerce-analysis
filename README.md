@@ -8,7 +8,7 @@ and customer satisfaction, and what should the business fix first?**
 
 ![Dashboard](images/dashboard.png)
 
-**Tech stack:** SQL (DuckDB) · Python (pandas, matplotlib, seaborn) · Plotly · Streamlit · Jupyter
+**Tech stack:** SQL (DuckDB) · Python (pandas, matplotlib, seaborn) · Plotly · HTML/JavaScript · Jupyter
 
 ---
 
@@ -61,16 +61,14 @@ olist-ecommerce-analysis/
 │   ├── build_database.py         # 2. load into DuckDB + build clean tables & fct_orders
 │   ├── run_queries.py            # 3. run all SQL files -> sql/results/*.csv
 │   ├── build_notebook.py         # generates the analysis notebook
-│   ├── export_dashboard_data.py  # compact Parquet extract for the dashboard
-│   ├── export_web_data.py        # pre-aggregated JSON for the live web dashboard
+│   ├── export_web_data.py        # 4. pre-aggregated JSON for the live dashboard
 │   └── viz_style.py              # shared chart style
 ├── sql/                          # 16 business questions answered in SQL
 │   └── results/                  # query outputs (CSV)
 ├── notebooks/olist_analysis.ipynb
-├── docs/                         # live web dashboard (GitHub Pages)
-├── dashboard/
-│   ├── app.py                    # Streamlit dashboard (4 tabs, filters)
-│   └── data/                     # Parquet extract (~7 MB)
+├── docs/                         # live dashboard (GitHub Pages)
+│   ├── index.html                # page, charts & filters (Plotly.js)
+│   └── data.json                 # pre-aggregated data (~300 KB)
 └── images/                       # charts used in this README
 ```
 
@@ -134,12 +132,13 @@ pip install -r requirements.txt
 python scripts/download_data.py      # ~120 MB of CSVs
 python scripts/build_database.py     # builds data/olist.duckdb
 python scripts/run_queries.py        # runs all 16 SQL queries
+python scripts/export_web_data.py    # refreshes docs/data.json for the dashboard
 
-streamlit run dashboard/app.py       # opens the dashboard at localhost:8501
+python -m http.server -d docs 8000   # view the dashboard at localhost:8000
 ```
 
-The dashboard only needs the Parquet files in `dashboard/data/`, so it runs right after
-`pip install` (and deploys as-is to [Streamlit Community Cloud](https://streamlit.io/cloud)).
+The dashboard is a static page with no server or backend: the period and state filters
+re-aggregate `data.json` in the browser, and GitHub Pages hosts it straight from `docs/`.
 
 ## 📁 Dataset
 
